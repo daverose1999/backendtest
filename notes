@@ -27,7 +27,7 @@ GET
 PATCH - Update the product
 Delete - get rid of it
 
-(OPTIONAL)
+(OPTIONAL)- canceled due to lack of experience
 /orders
 GET
 POST
@@ -50,7 +50,13 @@ Dashboard:
 Add Routes
 Error Handling
 Parsing the body
-Handling CORS (Cross Origin Resourse Sharing)
-
-MongoDB and Mongoose
+Handling CORS (Cross Origin Resourse Sharing) (according to some articles)
+MongoDB and Mongoose (We are here)
 Mongoose Validation
+Populate Queries
+Upload Image fOR Products
+Add User Signup
+Add roles (Users and Customers) to access data accordingly
+Add User Login & JWT Signing
+JWT Route Protection
+Add Controllers
