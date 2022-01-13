@@ -1,26 +1,28 @@
-Restful Api 
+Restful Api
+
 1. What is it?
-Respresentational State Transfer
-They are statless backends without the need for HTML trappings. 
+   Respresentational State Transfer
+   They are statless backends without the need for HTML trappings.
 
 Restful Constraints
+
 1. client-server Architecture - should not concern with ui
 2. statless - no session is stored
 3. cacheability - responses must define as cacheable or non-cacheable (for efficiency)
 4. layered system - ??? (further study)
 5. uniform interface - responses are identify in requests and transferred data is decoupled from db schema
-??? (further study)
+   ??? (further study)
 6. code on demand (optional) - ???
 
-Planning what to build
----------
+## Planning what to build
+
 My Api
 /products
 GET - to get a list of products
 POST - to add new products
 
 target a product by id
-/product/{id} 
+/product/{id}
 GET
 PATCH - Update the product
 Delete - get rid of it
@@ -34,30 +36,21 @@ POST
 GET
 DELETE
 
-Design
-------
+## Design
 
-(Dashboard) 
-Navbar:	Find item (Search ) (center)	Profile Page Link (right)
-Side Nav: Logo, Dashboard, Create item, Orders, Employees
-Dashboard: 
-1. Pending Orders Count, Products Count, Employees Count 
-2. Table: List items (Update item, Delete item)
-    
-Orders: 
+Navbar: Find item (Search ) (center) Profile Page Link (right)
+Side Nav: Logo, Dashboard, Create item, Products, Employees
+Dashboard:
 
+1. Products Count, Employees Count
+2. Table: List items (Update item, Delete item) capped to 20 items
 
+## Order of coding
 
+Add Routes
+Error Handling
+Parsing the body
+Handling CORS (Cross Origin Resourse Sharing)
 
-
-
-
-
-
-
-
-
-
-
-
-
+MongoDB and Mongoose
+Mongoose Validation
