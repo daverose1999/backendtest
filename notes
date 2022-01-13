@@ -51,10 +51,10 @@ Add Routes
 Error Handling
 Parsing the body
 Handling CORS (Cross Origin Resourse Sharing) (according to some articles)
-MongoDB and Mongoose (We are here)
+MongoDB and Mongoose
 Mongoose Validation
 Populate Queries
-Upload Image fOR Products
+Upload Image fOR Products (We are here)
 Add User Signup
 Add roles (Users and Customers) to access data accordingly
 Add User Login & JWT Signing

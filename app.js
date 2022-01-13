@@ -8,7 +8,6 @@ const morgan = require("morgan");
 const bodyParser = require("body-parser");
 //SETUP connetion
 const mongoose = require("mongoose");
-
 //requests are forwarded to this file if the url targeted is /products
 const productRoutes = require("./api/routes/products");
 
@@ -24,6 +23,10 @@ mongoose.Promise = global.Promise;
 
 //sets up a middleware so an incoming request has to go through app.use and do whatever parameter is passed through it
 app.use(morgan("dev"));
+
+//makes uploads available to everyone
+app.use("/uploads", express.static("uploads"));
+
 //apply body parser to incoming request
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());

@@ -2,12 +2,45 @@ const express = require("express");
 /*express router sub package the express framework ships with that gives us different capabilities to conveniently handle different routes reaching diferent endpoints with different http words*/
 const router = express.Router();
 const mongoose = require("mongoose");
+
+const multer = require("multer");
+//to only store certain types
+const storage = multer.diskStorage({
+  //where the file is to be stored
+  destination: function (req, file, cb) {
+    cb(null, "./uploads/");
+  },
+  //file should be named
+  filename: function (req, file, cb) {
+    cb(null, new Date().toISOString().replace(/:/g, "-") + file.originalname);
+  },
+});
+
+const fileFilter = (req, file, cb) => {
+  //reject a file
+  if (file.mimetype === "image/jpeg" || file.mimetype === "image/png") {
+    cb(null, true);
+  } else {
+    cb(null, false);
+  }
+};
+
+//pass data to multer configuration object and filter file size
+const upload = multer({
+  storage: storage,
+  limits: {
+    fileSize: 1024 * 1024 * 5, //files up to 5mb
+  },
+  //call the filter constant above
+  fileFilter: fileFilter,
+});
+
 const Product = require("../models/products");
 
 //use router to initialize different routes next is used so the move request to next middleware
 router.get("/", (req, res, next) => {
   Product.find()
-    .select("name price _id") //define fields to selects
+    .select("name price _id quantity productImage") //define fields to selects
     .exec()
     .then((docs) => {
       //return all products
@@ -16,10 +49,12 @@ router.get("/", (req, res, next) => {
       const response = {
         count: docs.length,
         products: docs.map((doc) => {
-          //map into a new array to get individual doc and fetch the new version fo it
+          //map into a new array to get individual doc and fetch the new version of it
           return {
             name: doc.name,
             price: doc.price,
+            quantity: doc.quantity,
+            productImage: doc.productImage,
             _id: doc._id,
             request: {
               type: "GET",
@@ -45,7 +80,8 @@ router.get("/", (req, res, next) => {
 });
 
 //handling post requests to this route
-router.post("/", (req, res, next) => {
+router.post("/", upload.single("productImage"), (req, res, next) => {
+  console.log(req.file);
   //use instance of the model to store data
   const product = new Product({
     //extract property from incoming request
@@ -53,6 +89,7 @@ router.post("/", (req, res, next) => {
     name: req.body.name,
     price: req.body.price,
     quantity: req.body.quantity,
+    productImage: req.file.path,
   });
 
   //this is used to store in the database,
@@ -66,6 +103,8 @@ router.post("/", (req, res, next) => {
         createdProduct: {
           name: result.name,
           price: result.price,
+          quantity: result.quantity,
+          productImage: result.productImage,
           _id: result._id,
           request: {
             type: "GET",
@@ -87,7 +126,7 @@ router.get("/:productId", (req, res, next) => {
   //extract productID
   const id = req.params.productId;
   Product.findById(id)
-    .select("name price _id")
+    .select("name price quantity _id productImage")
     .exec()
     .then((doc) => {
       console.log("From Database", doc);
@@ -163,6 +202,7 @@ router.delete("/:productId", (req, res, next) => {
           body: {
             name: "String",
             Price: "Number",
+            Quantity: "Number",
           },
         },
       });
