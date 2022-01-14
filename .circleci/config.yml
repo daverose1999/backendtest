@@ -17,6 +17,8 @@ jobs:
       - run:
           name: "Say hello"
           command: "echo Hello, World!"
+orbs:
+  heroku: circleci/heroku@0.0.10
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
@@ -24,3 +26,6 @@ workflows:
   say-hello-workflow:
     jobs:
       - say-hello
+  heroku_deploy:
+    jobs:
+      - heroku/deploy-via-git
