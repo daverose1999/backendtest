@@ -2,6 +2,7 @@
 So it check for a valid token, only if this is true it can conitnue  */
 
 const jwt = require("jsonwebtoken");
+require("dotenv").config();
 
 //default middle pattern
 module.exports = (req, res, next) => {
