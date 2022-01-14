@@ -8,8 +8,10 @@ const morgan = require("morgan");
 const bodyParser = require("body-parser");
 //SETUP connetion
 const mongoose = require("mongoose");
+
 //requests are forwarded to this file if the url targeted is /products
 const productRoutes = require("./api/routes/products");
+const userRoutes = require("./api/routes/user");
 
 mongoose.connect(
   "mongodb+srv://daverose1999:" +
@@ -18,8 +20,7 @@ mongoose.connect(
     "@backend-test.p7n6k.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
   //it will use the mongodbclient for connecting espiceially for mongoose
 );
-//
-mongoose.Promise = global.Promise;
+//mongoose.Promise = global.Promise;
 
 //sets up a middleware so an incoming request has to go through app.use and do whatever parameter is passed through it
 app.use(morgan("dev"));
@@ -56,7 +57,7 @@ app.use((req, res, next) => {
 
 //every request is a funnelled through, therefore only requests that start with /products, will be handled by handlers parsed as argument ie  ProductRoutes
 app.use("/products", productRoutes);
-
+app.use("/user", userRoutes);
 //catch all requests that make it past the middlewares
 app.use((req, res, next) => {
   const error = new Error("Not found");

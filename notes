@@ -54,9 +54,10 @@ Handling CORS (Cross Origin Resourse Sharing) (according to some articles)
 MongoDB and Mongoose
 Mongoose Validation
 Populate Queries
-Upload Image fOR Products (We are here)
+Upload Image fOR Products
 Add User Signup
-Add roles (Users and Customers) to access data accordingly
 Add User Login & JWT Signing
-JWT Route Protection
+JWT Route Protection (We are here)
 Add Controllers
+
+Testing
