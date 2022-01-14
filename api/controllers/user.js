@@ -85,6 +85,10 @@ exports.user_login = (req, res, next) => {
             message: "Auth Successful",
             //store token in constant
             token: token,
+            request: {
+              type: "GET",
+              url: "http://localhost:3000/user/" + user[0]._id,
+            },
           });
         }
         return res.status(401).json({
