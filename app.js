@@ -6,6 +6,7 @@ const app = express();
 //Logger middleware tells express to funnel all request through this middleware this will eventually call the next function below to continue process
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
+require("dotenv").config();
 //SETUP connetion
 const mongoose = require("mongoose");
 
